@@ -19,4 +19,5 @@ Verify that you now have the key with the fingerprint 9DC8 5822 9FC7 DD38 854A E
 ```
 sudo mkdir -p /opt/bin
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /opt/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 ```
