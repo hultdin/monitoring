@@ -16,6 +16,8 @@ sudo apt-get install docker-ce docker-ce-cli
 Verify that you now have the key with the fingerprint 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88, by searching for the last 8 characters of the fingerprint.
 
 # 02. Install Docker Compose
+
+Update path according to latest release of Docker Compose, see https://github.com/docker/compose/releases
 ```
 sudo mkdir -p /opt/bin
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /opt/bin/docker-compose
