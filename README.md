@@ -1,6 +1,6 @@
-# 00. Docker + Prometheus == True
+# 00. Docker + Prometheus + Grafana == True
 
-This is an attempt to document the process of installing Docker and Prometheus on Ubuntu 16.04LTS<br>
+This is an attempt to document the process of installing Docker, Prometheus, and Grafana on Ubuntu 16.04LTS<br>
 
 # 01. Install Docker (CE) and dependencies
 ```
