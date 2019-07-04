@@ -21,7 +21,7 @@ Update path according to latest release of Docker Compose, see https://github.co
 ```
 sudo mkdir -p /opt/bin
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /opt/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+sudo chmod +x /opt/bin/docker-compose
 ```
 
 # 03. Install Portainer
@@ -30,12 +30,12 @@ Volumes are the preferred wa yto persist data in Docker containers and services
 sudo docker volume create portainer
 ```
 
-Create the ```docker-compose.yaml``` file in ```/opt/docker/compose/portainer```
+Create the docker-compose.yaml file in /opt/docker/compose/portainer
 ```
 version: '3.7'
 services:
   portainer:
-    image: portainer/portainer:${TAG}
+    image: portainer/portainer:1.21.0
     container_name: 'portainer'
     network_mode: 'bridge'
     command: -H unix:///var/run/docker.sock
@@ -48,6 +48,10 @@ services:
 volumes:
     portainer:    
        external: true
+```
+Build and start the Portainer container
+```
+sudo /opt/bin/docker-compose up --build -d
 ```
 
 # 04. Install Apache
