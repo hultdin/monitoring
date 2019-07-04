@@ -51,6 +51,7 @@ volumes:
 ```
 Build and start the Portainer container
 ```
+cd /opt/docker/compose/portainer
 sudo /opt/bin/docker-compose up --build -d
 ```
 
