@@ -1,4 +1,4 @@
-# 00. Docker + Prometheus + Grafana == True
+# 00. Docker + Prometheus + Grafana + MySQL == True
 
 This is an attempt to document the process of installing Docker, Prometheus, Grafana, and MySQL on Ubuntu 16.04LTS<br>
 
