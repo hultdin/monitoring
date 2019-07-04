@@ -23,3 +23,38 @@ sudo mkdir -p /opt/bin
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /opt/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 ```
+
+# 03. Install Portainer
+Volumes are the preferred wa yto persist data in Docker containers and services 
+```
+sudo docker volume create portainer
+```
+
+Create the ```docker-compose.yaml``` file in ```/opt/docker/compose/portainer```
+```
+version: '3.7'
+services:
+  portainer:
+    image: portainer/portainer:${TAG}
+    container_name: 'portainer'
+    network_mode: 'bridge'
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - '127.0.0.1:9000:9000'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - 'portainer:/data'
+    restart: unless-stopped
+volumes:
+    portainer:    
+       external: true
+```
+
+# 04. Install Apache
+Apache is used as reverse proxy running on the "native" host (i.e. outside of Docker)
+```
+sudo apt-get update
+sudo apt-get install apache2
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+```
