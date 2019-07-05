@@ -1,4 +1,4 @@
-# 00. Docker + Prometheus + Grafana + MySQL == True
+# 00. Docker + Prometheus + Grafana == True
 
 This is an attempt to document the process of installing Docker, Prometheus, Grafana, and MySQL on Ubuntu 16.04LTS<br>
 
@@ -85,10 +85,6 @@ scrape_configs:
 Create a directory for the Prometheus TSDB
 ```
 sudo mkdir -p /opt/docker/volume/prometheus/data
-```
-Create a MySQL volume
-```
-sudo docker volume create mysql
 ```
 Create a Grafana configuration in /opt/docker/volume/grafana/config/grafana.ini by fetching the default configuration from master branch at https://github.com/grafana/grafana/blob/master/conf/defaults.ini or a custom tag.
 ```
