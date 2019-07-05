@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.10.0
+    container_name: prometheus
+    volumes:
+      - /opt/docker/volume/prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /opt/docker/volume/prometheus/data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-admin-api'
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+    restart: unless-stopped
+  grafana:
+    image: grafana/grafana:6.2.5
+    container_name: grafana
+    volumes:
+      - /opt/docker/volume/grafana/config/grafana.ini:/etc/grafana/grafana.ini
+      - /opt/docker/volume/grafana/plugins:/var/lib/grafana/plugins
+      - grafana:/var/lib/grafana
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    networks:
+      - monitoring
+    restart: unless-stopped
+
+volumes:
+    grafana:    
+       external: true
