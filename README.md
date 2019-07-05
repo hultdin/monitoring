@@ -70,7 +70,7 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [NE,R,L]
 ```
-Enable mod_ssl and mod_rewrite to get the redirect working
+Enable Apache mod_ssl and mod_rewrite to get the redirect working
 ```
 sudo a2enmod ssl rewrite
 sudo a2ensite redirect
