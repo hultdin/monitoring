@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  portainer:
+    image: portainer/portainer:1.21.0
+    container_name: 'portainer'
+    network_mode: 'bridge'
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - '9000:9000'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - 'portainer:/data'
+    restart: unless-stopped
+volumes:
+    portainer:    
+       external: true
