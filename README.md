@@ -30,7 +30,7 @@ Volumes are the preferred wa yto persist data in Docker containers and services
 sudo docker volume create portainer
 ```
 
-Create the following docker-compose.yaml file in /opt/docker/compose/portainer
+Create the following docker-compose.yaml file in /opt/docker/compose/portainer and update the tag for portainer/portainer with a valid tag from https://hub.docker.com/r/portainer/portainer/tags
 ```
 version: '3.7'
 services:
