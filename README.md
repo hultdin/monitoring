@@ -25,7 +25,7 @@ sudo chmod +x /opt/bin/docker-compose
 ```
 
 # 03. Install Portainer (optional)
-Volumes are the preferred wa yto persist data in Docker containers and services 
+Create a volume for Portainer (volumes are the preferred way to persist data in Docker containers and services)
 ```
 sudo docker volume create portainer
 ```
@@ -53,7 +53,7 @@ Build and start the Portainer container
 cd /opt/docker/compose/portainer
 sudo /opt/bin/docker-compose up --build -d
 ```
-This will create a stack called 'portainer'
+This will create a stack called 'portainer' (container: 'portainer', volume: 'portainer', image: 'portainer/portainer:1.21.0')
 
 Open port 9000/tcp in the firewall unless the service is running behind a reverse proxy (recommended)
 
