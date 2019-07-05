@@ -85,6 +85,7 @@ scrape_configs:
 Create a directory for the Prometheus TSDB
 ```
 sudo mkdir -p /opt/docker/volume/prometheus/data
+sudo chown 65534:65534 /opt/docker/volume/prometheus/data
 ```
 Create a Grafana configuration in /opt/docker/volume/grafana/config/grafana.ini by fetching the default configuration from master branch at https://github.com/grafana/grafana/blob/master/conf/defaults.ini or a custom tag.
 ```
