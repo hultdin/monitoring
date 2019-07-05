@@ -40,7 +40,7 @@ Build and start the Portainer container
 cd /opt/docker/compose/portainer
 sudo /opt/bin/docker-compose up --build -d
 ```
-This will create a stack called 'portainer' (container: 'portainer', volume: 'portainer', image: 'portainer/portainer:1.21.0')
+This will create a stack called 'portainer'
 
 Open port 9000/tcp in the firewall unless the service is running behind a reverse proxy (recommended)
 
@@ -98,6 +98,8 @@ Build and start the 'monitoring' stack (prometheus and grafana)
 cd /opt/docker/compose/monitoring
 sudo /opt/bin/docker-compose up --build -d
 ```
+This will create a stack called 'monitoring'
+
 Open port 3000/tcp and 9090/tcp in the firewall unless the service is running behind a reverse proxy (recommended)
 
 # XX. Install and configure Apache
