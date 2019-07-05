@@ -56,7 +56,9 @@ sudo /opt/bin/docker-compose up --build -d
 ```
 Open port 9000/tcp in the firewall unless you're running the service behind a reverse proxy (recommended)
 
-Portainer 
+http://localhost:9000
+
+Please note; Portainer will ask you to set a password on first launch 
 # 04. Install and configure Apache
 Apache is used as reverse proxy running on the "native" host (i.e. outside of Docker)
 ```
