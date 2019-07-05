@@ -55,11 +55,31 @@ cd /opt/docker/compose/portainer
 sudo /opt/bin/docker-compose up --build -d
 ```
 
-# 04. Install Apache
+# 04. Install and configure Apache
 Apache is used as reverse proxy running on the "native" host (i.e. outside of Docker)
 ```
 sudo apt-get update
 sudo apt-get install apache2
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
+sudo a2dissite 000-default
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/redirect.conf
 ```
+Update /etc/apache2/sites-available/redirect.conf to rewrite http to https
+```
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [NE,R,L]
+```
+Enable mod_ssl and mod_rewrite to get the redirect working
+```
+sudo a2enmod ssl rewrite
+sudo a2ensite redirect
+```
+
+# 05. Configure Apache as reverse proxy
+Redirect http to https using mod_proxy, see https://www.digitalocean.com/community/tutorials/how-to-use-apache-http-server-as-reverse-proxy-using-mod_proxy-extension
+```
+sudo a2enmod proxy proxy_http
+```
+
