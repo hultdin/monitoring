@@ -86,7 +86,7 @@ sudo docker volume create grafana
 ```
 Create the 'monitoring' network (bridge mode)
 ```
-docker network create -d bridge monitoring
+sudo docker network create -d bridge monitoring
 ```
 Create docker-compose.yaml for the 'monitoring' stack, see https://github.com/hultdin/monitoring/blob/master/monitoring-docker-compose.yml
 ```
