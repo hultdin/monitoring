@@ -24,7 +24,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-
 sudo chmod +x /opt/bin/docker-compose
 ```
 
-# 03. Install Portainer
+# 03. Install Portainer (optional)
 Volumes are the preferred wa yto persist data in Docker containers and services 
 ```
 sudo docker volume create portainer
