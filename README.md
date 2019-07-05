@@ -29,7 +29,6 @@ Volumes are the preferred wa yto persist data in Docker containers and services
 ```
 sudo docker volume create portainer
 ```
-
 Create the following docker-compose.yaml file in /opt/docker/compose/portainer and update the tag for portainer/portainer with a valid tag from https://hub.docker.com/r/portainer/portainer/tags
 ```
 version: '3.7'
@@ -59,7 +58,48 @@ This will create a stack called 'portainer'
 Open port 9000/tcp in the firewall unless the service is running behind a reverse proxy (recommended)
 
 http://localhost:9000
- 
+
+# 04. Install 'monitoring' stack
+Create a minimal Prometheus configuration in /opt/docker/volume/prometheus/config/prometheus.yml
+```
+# Global configuration
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+    - targets: [
+        'localhost:9090'
+      ]
+```
+Create data directory for the Prometheus TSDB
+```
+sudo mkdir -p /opt/docker/volume/prometheus/data
+```
+Create MySQL volume
+```
+sudo docker volume create mysql
+```
+Create a Grafana configuration in /opt/docker/volume/grafana/config/grafana.ini by fetching the default configuration from master branch at https://github.com/grafana/grafana/blob/master/conf/defaults.ini or a custom tag.
+```
+wget -q -O - https://raw.githubusercontent.com/grafana/grafana/master/conf/defaults.ini | sudo tee /opt/docker/volume/grafana/config/grafana.ini
+```
+Create a directory for plugins and a general Grafana volume
+```
+sudo mkdir -p /opt/docker/volume/grafana/plugins
+sudo docker volume create grafana
+```
+
 # 04. Install and configure Apache
 Apache is used as reverse proxy running on the "native" host (i.e. outside of Docker)
 ```
