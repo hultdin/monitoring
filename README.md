@@ -104,7 +104,7 @@ docker network create -d bridge monitoring
 Create docker-compose.yaml for the 'monitoring' stack
 ```
 sudo mkdir -p /opt/docker/compose/monitoring
-wget -q -O - https://raw.githubusercontent.com/hultdin/monitoring/master/docker-compose.yml | sudo tee /opt/docker/compose/monitoring/docker-compose.yaml
+wget -q -O - https://raw.githubusercontent.com/hultdin/monitoring/master/monitoring-docker-compose.yml | sudo tee /opt/docker/compose/monitoring/docker-compose.yaml
 ```
 Build and start the 'monitoring' stack (prometheus and grafana)
 ```
