@@ -29,25 +29,12 @@ Create a volume for Portainer (volumes are the preferred way to persist data in 
 ```
 sudo docker volume create portainer
 ```
-Create the following docker-compose.yaml file in /opt/docker/compose/portainer and update the tag for portainer/portainer with a valid tag from https://hub.docker.com/r/portainer/portainer/tags
+Create docker-compose.yaml for the 'portainer' stack, see https://github.com/hultdin/monitoring/blob/master/portainer-docker-compose.yml
 ```
-version: '3.7'
-services:
-  portainer:
-    image: portainer/portainer:1.21.0
-    container_name: 'portainer'
-    network_mode: 'bridge'
-    command: -H unix:///var/run/docker.sock
-    ports:
-      - '9000:9000'
-    volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
-      - 'portainer:/data'
-    restart: unless-stopped
-volumes:
-    portainer:    
-       external: true
+sudo mkdir -p /opt/docker/compose/portainer
+wget -q -O - https://raw.githubusercontent.com/hultdin/monitoring/master/portainer-docker-compose.yml | sudo tee /opt/docker/compose/portainer/docker-compose.yaml
 ```
+
 Build and start the Portainer container
 ```
 cd /opt/docker/compose/portainer
@@ -101,7 +88,7 @@ Create the 'monitoring' network (bridge mode)
 ```
 docker network create -d bridge monitoring
 ```
-Create docker-compose.yaml for the 'monitoring' stack
+Create docker-compose.yaml for the 'monitoring' stack, see https://github.com/hultdin/monitoring/blob/master/monitoring-docker-compose.yml
 ```
 sudo mkdir -p /opt/docker/compose/monitoring
 wget -q -O - https://raw.githubusercontent.com/hultdin/monitoring/master/monitoring-docker-compose.yml | sudo tee /opt/docker/compose/monitoring/docker-compose.yaml
@@ -113,7 +100,7 @@ sudo /opt/bin/docker-compose up --build -d
 ```
 Open port 3000/tcp and 9090/tcp in the firewall unless the service is running behind a reverse proxy (recommended)
 
-# 04. Install and configure Apache
+# XX. Install and configure Apache
 Apache is used as reverse proxy running on the "native" host (i.e. outside of Docker)
 ```
 sudo apt-get update
@@ -134,12 +121,12 @@ sudo a2enmod ssl rewrite
 sudo a2ensite redirect
 ```
 
-# 05. Configure Apache as reverse proxy
+# XX. Configure Apache as reverse proxy
 Redirect http to https using mod_proxy
 ```
 sudo a2enmod proxy proxy_http
 sudo cp /etc/apache2/sites-available/000-default-ssl.conf /etc/apache2/sites-available/redirect.conf
 ```
-# XX. References
+# 05. References
 https://www.portainer.io/installation/
 https://www.digitalocean.com/community/tutorials/how-to-use-apache-http-server-as-reverse-proxy-using-mod_proxy-extension
