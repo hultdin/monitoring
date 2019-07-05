@@ -40,7 +40,7 @@ services:
     network_mode: 'bridge'
     command: -H unix:///var/run/docker.sock
     ports:
-      - '127.0.0.1:9000:9000'
+      - '9000:9000'
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - 'portainer:/data'
@@ -54,7 +54,9 @@ Build and start the Portainer container
 cd /opt/docker/compose/portainer
 sudo /opt/bin/docker-compose up --build -d
 ```
+Open port 9000/tcp in the firewall unless you're running the service behind a reverse proxy (recommended)
 
+Portainer 
 # 04. Install and configure Apache
 Apache is used as reverse proxy running on the "native" host (i.e. outside of Docker)
 ```
@@ -80,6 +82,8 @@ sudo a2ensite redirect
 Redirect http to https using mod_proxy
 ```
 sudo a2enmod proxy proxy_http
+sudo cp /etc/apache2/sites-available/000-default-ssl.conf /etc/apache2/sites-available/redirect.conf
 ```
 # XX. References
+https://www.portainer.io/installation/
 https://www.digitalocean.com/community/tutorials/how-to-use-apache-http-server-as-reverse-proxy-using-mod_proxy-extension
