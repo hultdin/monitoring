@@ -78,8 +78,9 @@ sudo a2ensite redirect
 ```
 
 # 05. Configure Apache as reverse proxy
-Redirect http to https using mod_proxy, see https://www.digitalocean.com/community/tutorials/how-to-use-apache-http-server-as-reverse-proxy-using-mod_proxy-extension
+Redirect http to https using mod_proxy
 ```
 sudo a2enmod proxy proxy_http
 ```
-
+# XX. References
+https://www.digitalocean.com/community/tutorials/how-to-use-apache-http-server-as-reverse-proxy-using-mod_proxy-extension
