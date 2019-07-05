@@ -97,6 +97,21 @@ Create a directory for plugins and a general Grafana volume
 sudo mkdir -p /opt/docker/volume/grafana/plugins
 sudo docker volume create grafana
 ```
+Create the 'monitoring' network (bridge mode)
+```
+docker network create -d bridge monitoring
+```
+Create docker-compose.yaml for the 'monitoring' stack
+```
+sudo mkdir -p /opt/docker/compose/monitoring
+wget -q -O - https://raw.githubusercontent.com/hultdin/monitoring/master/docker-compose.yml | sudo tee /opt/docker/compose/monitoring/docker-compose.yaml
+```
+Build and start the 'monitoring' stack (prometheus and grafana)
+```
+cd /opt/docker/compose/monitoring
+sudo /opt/bin/docker-compose up --build -d
+```
+Open port 3000/tcp and 9090/tcp in the firewall unless the service is running behind a reverse proxy (recommended)
 
 # 04. Install and configure Apache
 Apache is used as reverse proxy running on the "native" host (i.e. outside of Docker)
