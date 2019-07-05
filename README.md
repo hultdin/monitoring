@@ -64,7 +64,7 @@ sudo ufw allow 80,443/tcp
 sudo a2dissite 000-default
 sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/redirect.conf
 ```
-Update /etc/apache2/sites-available/redirect.conf to rewrite http to https
+Update /etc/apache2/sites-available/redirect.conf to rewrite http to https, see https://github.com/hultdin/monitoring/blob/master/redirect.conf
 ```
 RewriteEngine On
 RewriteCond %{HTTPS} off
