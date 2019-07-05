@@ -60,7 +60,7 @@ Apache is used as reverse proxy running on the "native" host (i.e. outside of Do
 ```
 sudo apt-get update
 sudo apt-get install apache2
-sudo ufw allow 80, 443/tcp
+sudo ufw allow 80,443/tcp
 sudo a2dissite 000-default
 sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/redirect.conf
 ```
