@@ -82,16 +82,17 @@ scrape_configs:
         'localhost:9090'
       ]
 ```
-Create data directory for the Prometheus TSDB
+Create a directory for the Prometheus TSDB
 ```
 sudo mkdir -p /opt/docker/volume/prometheus/data
 ```
-Create MySQL volume
+Create a MySQL volume
 ```
 sudo docker volume create mysql
 ```
 Create a Grafana configuration in /opt/docker/volume/grafana/config/grafana.ini by fetching the default configuration from master branch at https://github.com/grafana/grafana/blob/master/conf/defaults.ini or a custom tag.
 ```
+sudo mkdir -p /opt/docker/volume/grafana/config
 wget -q -O - https://raw.githubusercontent.com/grafana/grafana/master/conf/defaults.ini | sudo tee /opt/docker/volume/grafana/config/grafana.ini
 ```
 Create a directory for plugins and a general Grafana volume
