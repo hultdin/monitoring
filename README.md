@@ -129,4 +129,4 @@ sudo cp /etc/apache2/sites-available/000-default-ssl.conf /etc/apache2/sites-ava
 ```
 # 05. References
 https://www.portainer.io/installation/
-https://www.digitalocean.com/community/tutorials/how-to-use-apache-http-server-as-reverse-proxy-using-mod_proxy-extension
+https://prometheus.io/docs/prometheus/latest/installation/#using-docker
