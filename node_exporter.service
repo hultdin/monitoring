@@ -1,0 +1,12 @@
+[Unit]
+Description=Prometheus Node Exporter
+After=network.target
+ 
+[Service]
+Type=simple
+User=prometheus
+Group=nogroup
+ExecStart=/opt/node_exporter/bin/node_exporter --web.enable-admin-api
+ 
+[Install]
+WantedBy=multi-user.target
