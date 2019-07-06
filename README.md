@@ -140,29 +140,17 @@ Create low privileged system account 'prometheus'
 sudo useradd -r -M -N -g 65534 -s /bin/false prometheus
 ```
 
-Create, enable, and start node_exporter service
-sudo nano /lib/systemd/system/node_exporter.service
-
------------------------------
-[Unit]
-Description=Prometheus Node Exporter
-After=network.target
- 
-[Service]
-Type=simple
-User=prometheus
-Group=nogroup
-ExecStart=/opt/node_exporter/bin/node_exporter --web.enable-admin-api
- 
-[Install]
-WantedBy=multi-user.target
-------------------------------
-
+Create, enable, and start node_exporter service, see https://github.com/hultdin/monitoring/blob/master/node_exporter.service
+```
+wget -q -O - https://raw.githubusercontent.com/hultdin/monitoring/master/node_exporter.service | sudo tee /lib/systemd/system/node_exporter.service
 sudo systemctl enable node_exporter
 sudo systemctl start node_exporter
+```
 
-# allow traffic to port 9100/tcp for metrics
-sudo ufw allow 9100/tcp
+Open port 9100/tcp in the firewall unless the service is running behind a reverse proxy
+
+http://localhost:9100/metrics
+
 # XX. Configure Apache as reverse proxy
 Redirect http to https using mod_proxy
 ```
