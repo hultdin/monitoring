@@ -140,7 +140,7 @@ Create low privileged system account 'prometheus'
 sudo useradd -r -M -N -g 65534 -s /bin/false prometheus
 ```
 
-Create, enable, and start node_exporter service, see https://github.com/hultdin/monitoring/blob/master/node_exporter.service
+Create, enable, and start the node_exporter service, see https://github.com/hultdin/monitoring/blob/master/node_exporter.service
 ```
 wget -q -O - https://raw.githubusercontent.com/hultdin/monitoring/master/node_exporter.service | sudo tee /lib/systemd/system/node_exporter.service
 sudo systemctl enable node_exporter
