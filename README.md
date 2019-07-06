@@ -102,27 +102,6 @@ This will create a stack called 'monitoring'
 
 Open port 3000/tcp and 9090/tcp in the firewall unless the service is running behind a reverse proxy (recommended)
 
-# XX. Install and configure Apache
-Apache is used as reverse proxy running on the "native" host (i.e. outside of Docker)
-```
-sudo apt-get update
-sudo apt-get install apache2
-sudo ufw allow 80,443/tcp
-sudo a2dissite 000-default
-sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/redirect.conf
-```
-Update /etc/apache2/sites-available/redirect.conf to rewrite http to https, see https://github.com/hultdin/monitoring/blob/master/redirect.conf
-```
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [NE,R,L]
-```
-Enable Apache mod_ssl and mod_rewrite to get the redirect working
-```
-sudo a2enmod ssl rewrite
-sudo a2ensite redirect
-```
-
 # 05. Install blackbox_exporter (optional)
 
 # 06. Install node_exporter (optional)
@@ -150,6 +129,27 @@ sudo systemctl start node_exporter
 Open port 9100/tcp in the firewall unless the service is running behind a reverse proxy
 
 http://localhost:9100/metrics
+
+# XX. Install and configure Apache
+Apache is used as reverse proxy running on the "native" host (i.e. outside of Docker)
+```
+sudo apt-get update
+sudo apt-get install apache2
+sudo ufw allow 80,443/tcp
+sudo a2dissite 000-default
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/redirect.conf
+```
+Update /etc/apache2/sites-available/redirect.conf to rewrite http to https, see https://github.com/hultdin/monitoring/blob/master/redirect.conf
+```
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [NE,R,L]
+```
+Enable Apache mod_ssl and mod_rewrite to get the redirect working
+```
+sudo a2enmod ssl rewrite
+sudo a2ensite redirect
+```
 
 # XX. Configure Apache as reverse proxy
 Redirect http to https using mod_proxy
