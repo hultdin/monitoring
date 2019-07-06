@@ -123,6 +123,46 @@ sudo a2enmod ssl rewrite
 sudo a2ensite redirect
 ```
 
+# 05. Install blackbox_exporter (optional)
+
+# 06. Install node_exporter (optional)
+Download and install node_exporter
+```
+wget https://github.com/prometheus/node_exporter/releases/download/v0.18.0/node_exporter-0.18.0.linux-amd64.tar.gz
+tar xzvf node_exporter-0.18.0.linux-amd64.tar.gz
+sudo mkdir -p /opt/node_exporter/bin
+sudo cp -r node_exporter-0.18.0.linux-amd64 /opt/node_exporter
+sudo ln -s "../node_exporter-0.18.0.linux-amd64/node_exporter" /opt/node_exporter/bin/node_exporter
+```
+
+Create low privileged system account 'prometheus'
+```
+sudo useradd -r -M -N -g 65534 -s /bin/false prometheus
+```
+
+Create, enable, and start node_exporter service
+sudo nano /lib/systemd/system/node_exporter.service
+
+-----------------------------
+[Unit]
+Description=Prometheus Node Exporter
+After=network.target
+ 
+[Service]
+Type=simple
+User=prometheus
+Group=nogroup
+ExecStart=/opt/node_exporter/bin/node_exporter --web.enable-admin-api
+ 
+[Install]
+WantedBy=multi-user.target
+------------------------------
+
+sudo systemctl enable node_exporter
+sudo systemctl start node_exporter
+
+# allow traffic to port 9100/tcp for metrics
+sudo ufw allow 9100/tcp
 # XX. Configure Apache as reverse proxy
 Redirect http to https using mod_proxy
 ```
@@ -132,3 +172,5 @@ sudo cp /etc/apache2/sites-available/000-default-ssl.conf /etc/apache2/sites-ava
 # 05. References
 https://www.portainer.io/installation/
 https://prometheus.io/docs/prometheus/latest/installation/#using-docker
+https://devopscube.com/monitor-linux-servers-prometheus-node-exporter/
+https://github.com/prometheus/node_exporter/releases
